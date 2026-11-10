@@ -122,6 +122,20 @@ h2{font-size:clamp(26px,4vw,36px)}
 @media (max-width:400px){.store-actions .store-btn{font-size:15px;padding:0 8px;gap:6px}.store-actions .store-btn svg{width:20px;height:20px}}
 .store-actions .store-btn svg{flex:none;display:block}
 
+
+/* Tabs */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(11,22,38,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-top:22px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--sea)}
+.tabbar{display:flex;gap:6px;padding-block:10px}
+.tab{flex:1 1 0;min-width:0;appearance:none;border:1px solid var(--line);background:var(--deck);color:var(--muted);font:inherit;font-weight:700;font-size:16px;border-radius:10px;padding:10px 8px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tab:hover{color:var(--fg)}
+.tab[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.col{display:grid;gap:22px;align-content:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+@media (max-width:900px){.grid3{grid-template-columns:1fr}}
+.tl-short{display:none}
+@media (max-width:440px){.tab{font-size:15px;padding:10px 4px}.tl-long{display:none}.tl-short{display:inline}}
+
 /* Tabelle */
 .search{display:flex;gap:10px;align-items:center;margin-bottom:12px}
 .search input{flex:1;min-width:0;max-width:340px;background:var(--deck);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:10px 12px;font:inherit}
@@ -492,8 +506,18 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
   </div>
 </header>
 
+<nav class="tabs" aria-label="Bereiche">
+  <div class="wrap">
+    <div class="tabbar" role="tablist">
+      <button class="tab" role="tab" id="t-rangliste" data-tab="rangliste" aria-controls="p-rangliste" aria-selected="true">Rangliste</button>
+      <button class="tab" role="tab" id="t-regeln" data-tab="regeln" aria-controls="p-regeln" aria-selected="false"><span class="tl-long">Regeln &amp; Preise</span><span class="tl-short">Preise</span></button>
+      <button class="tab" role="tab" id="t-infos" data-tab="infos" aria-controls="p-infos" aria-selected="false">Infos</button>
+    </div>
+  </div>
+</nav>
+
 <main>
-  <section>
+  <section class="panel" id="p-rangliste" data-panel="rangliste" role="tabpanel" aria-labelledby="t-rangliste">
     <div class="wrap">
       <div class="sec-head">
         <h2>Rangliste</h2>
@@ -516,9 +540,11 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
     </div>
   </section>
 
-  <section>
-    <div class="wrap grid2">
-      <div class="rules">
+  <section class="panel" id="p-regeln" data-panel="regeln" role="tabpanel" aria-labelledby="t-regeln" hidden>
+    <div class="wrap">
+      <div class="sec-head"><h2>Regeln &amp; Preise</h2></div>
+      <div class="grid2">
+        <div class="col">
         <div class="card">
           <h3>So gibt es Punkte</h3>
           <ul class="pts-list">
@@ -528,6 +554,17 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
           </ul>
           <p class="note">Bei Punktgleichheit liegt vorne, wer mehr Teilnahmen hat.</p>
         </div>
+        <div class="card">
+          <h3>Preise am Saisonende</h3>
+          <div id="prize-now"></div>
+          <div id="prize-next" hidden>
+            <p class="prize-next-head"></p>
+            <div class="prize-next-list"></div>
+          </div>
+          <p class="note">Alle Ligaspieler werden bei der Anmeldung zum Pre-Release bevorzugt.</p>
+        </div>
+        </div>
+        <div class="col">
         <div class="bounty-card">
           <div class="bc-wanted">WANTED</div>
           <div class="bc-doa">Dead or Alive · Kopfgeld auf die Top 3</div>
@@ -540,18 +577,15 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
           <p class="bc-small">Es zählt der Tabellenstand zu Beginn des jeweiligen Locals.</p>
           <span class="bc-stamp">Marine HQ<br>CardKomet</span>
         </div>
-        <div class="card">
-          <h3>Preise am Saisonende</h3>
-          <div id="prize-now"></div>
-          <div id="prize-next" hidden>
-            <p class="prize-next-head"></p>
-            <div class="prize-next-list"></div>
-          </div>
-          <p class="note">Alle Ligaspieler werden bei der Anmeldung zum Pre-Release bevorzugt.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="side">
+  <section class="panel" id="p-infos" data-panel="infos" role="tabpanel" aria-labelledby="t-infos" hidden>
+    <div class="wrap">
+      <div class="sec-head"><h2>Infos</h2></div>
+      <div class="grid3">
         <div class="card">
           <h3>Spieltage</h3>
           <div class="days">
@@ -657,6 +691,28 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
   });
   document.getElementById('chip-players').innerHTML = '<b>'+players.length+'</b> Spieler in der Liga';
   document.getElementById('stamp').textContent = 'Stand: '+data.updated;
+
+
+  // Tabs
+  var tabs=[].slice.call(document.querySelectorAll('.tab')), panels=[].slice.call(document.querySelectorAll('.panel'));
+  var names=tabs.map(function(t){return t.dataset.tab;});
+  var bar=document.querySelector('.tabs');
+  function show(name, scroll){
+    if(names.indexOf(name)<0) name='rangliste';
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.tab===name ? 'true':'false'); t.tabIndex = t.dataset.tab===name ? 0 : -1; });
+    panels.forEach(function(p){ p.hidden = p.dataset.panel!==name; });
+    if(scroll){ var top=bar.getBoundingClientRect().top+window.scrollY; if(window.scrollY>top) window.scrollTo({top:top}); }
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){ if(location.hash!=='#'+t.dataset.tab){ location.hash=t.dataset.tab; } else show(t.dataset.tab,true); });
+    t.addEventListener('keydown',function(e){
+      var k=e.key, j=null;
+      if(k==='ArrowRight') j=(i+1)%tabs.length; else if(k==='ArrowLeft') j=(i-1+tabs.length)%tabs.length;
+      if(j!==null){ e.preventDefault(); tabs[j].focus(); tabs[j].click(); }
+    });
+  });
+  window.addEventListener('hashchange',function(){ show(location.hash.slice(1),true); });
+  show(location.hash.slice(1),false);
 
   // Suche
   var q = document.getElementById('q'), noHit = document.getElementById('no-hit');
