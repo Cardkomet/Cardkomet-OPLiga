@@ -17,7 +17,7 @@
 
 ## Punkte
 - Teilnahme +1 · Sieg +1 (Freilos zählt als Sieg) · Turniersieg +2
-- Kopfgeld: Sieg gegen Platz 1/2/3 = +3/+2/+1 (Stand zu Beginn des Locals) – Startzeitpunkt noch offen
+- Kopfgeld: Sieg gegen Platz 1/2/3 = +3/+2/+1 (Stand zu Beginn des Locals) – gilt ab der Winter-Saison (23.11.2026)
 - Gleichstand: mehr Teilnahmen steht vorne
 
 ## Locals
