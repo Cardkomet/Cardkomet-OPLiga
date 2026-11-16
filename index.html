@@ -116,6 +116,7 @@ h2{font-size:clamp(26px,4vw,36px)}
 .bc-list li:first-child .bc-berry{font-size:36px;color:#8f1d22}
 .bc-text{margin:14px 0 0;font-size:16px;font-weight:600}
 .bc-small{margin:6px 0 0;font-size:14px;opacity:.75}
+.bc-start{margin:10px auto 0;width:max-content;max-width:100%;background:#a8262c;color:var(--paper);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:12px;padding:4px 10px;border-radius:3px;text-align:center}
 .bc-stamp{position:absolute;right:14px;top:16px;transform:rotate(12deg);border:2px solid #a8262c;color:#a8262c;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:10px;line-height:1.2;text-align:center;padding:4px 6px;border-radius:4px;opacity:.75}
 @media (max-width:640px){.bc-stamp{display:none}.bc-list li{grid-template-columns:54px minmax(0,1fr) auto}}
 @media (prefers-reduced-motion:reduce){.bounty-card{transform:none}}
@@ -587,6 +588,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
         <div class="bounty-card">
           <div class="bc-wanted">WANTED</div>
           <div class="bc-doa">Dead or Alive · Kopfgeld auf die Top 3</div>
+          <div class="bc-start">Gilt ab der Winter-Saison · 23.11.2026</div>
           <ol class="bc-list" id="bounty-list">
             <li><span class="bc-rank">Platz 1</span><span class="bc-name">–</span><span class="bc-berry">฿ +3</span></li>
             <li><span class="bc-rank">Platz 2</span><span class="bc-name">–</span><span class="bc-berry">฿ +2</span></li>
@@ -742,7 +744,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
     nameCell.textContent = p.name.trim();
     if(bounty[r]){
       var b = document.createElement('span'); b.className='bnt'; b.textContent='฿ +'+bounty[r];
-      b.title = 'Kopfgeld: +'+bounty[r]+' Punkte für einen Sieg gegen diesen Spieler';
+      b.title = 'Kopfgeld ab der Winter-Saison: +'+bounty[r]+' Punkte für einen Sieg gegen diesen Spieler';
       nameCell.appendChild(b);
     }
     tbody.appendChild(tr);
