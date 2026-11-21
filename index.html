@@ -151,6 +151,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .foot-links a{color:var(--muted);text-decoration:underline}
 .foot-links a:hover{color:var(--fg)}
 
+.season-pick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.season-btn{appearance:none;font:inherit;font-weight:700;font-size:15px;border:1px solid var(--line);background:var(--deck);color:var(--muted);border-radius:999px;padding:8px 14px;cursor:pointer}
+.season-btn:hover{color:var(--fg)}
+.season-btn[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#231a12}
+.champ{margin:0 0 12px;font-weight:700;color:var(--gold)}
+.champ b{font-family:var(--f-display);font-weight:400;color:var(--fg)}
+
 /* Tabelle */
 .search{display:flex;gap:10px;align-items:center;margin-bottom:12px}
 .search input{flex:1;min-width:0;max-width:340px;background:var(--deck);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:10px 12px;font:inherit}
@@ -237,7 +244,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
 <!-- Ligadaten: werden nach jedem Spieltag aktualisiert -->
 <script id="liga-data" type="application/json">
 {
- "updated": "16.11.2026, nach dem Montags-Local",
+ "updated": "21.11.2026",
  "seasons": [
   {
    "name": "Herbst-Saison 2026",
@@ -264,7 +271,9 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
      "label": "6 Booster",
      "text": "6 Booster"
     }
-   ]
+   ],
+   "champion": "Faoky",
+   "final": true
   },
   {
    "name": "Winter-Saison 2026/27",
@@ -314,171 +323,176 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
      "label": "2 Booster",
      "text": "2 Booster"
     }
-   ]
+   ],
+   "bounty": true,
+   "firstDay": "Montag, 23.11.2026, 18:00 Uhr"
   }
  ],
- "players": [
-  {
-   "name": "Faoky",
-   "points": 49,
-   "games": 11
-  },
-  {
-   "name": "Phanda",
-   "points": 40,
-   "games": 9
-  },
-  {
-   "name": "Trafa",
-   "points": 22,
-   "games": 8
-  },
-  {
-   "name": "Bonzenbence",
-   "points": 20,
-   "games": 9
-  },
-  {
-   "name": "Meruem",
-   "points": 15,
-   "games": 7
-  },
-  {
-   "name": "Noxfour",
-   "points": 14,
-   "games": 6
-  },
-  {
-   "name": "Chris4kl",
-   "points": 13,
-   "games": 5
-  },
-  {
-   "name": "Perser",
-   "points": 12,
-   "games": 4
-  },
-  {
-   "name": "1ceberk",
-   "points": 11,
-   "games": 4
-  },
-  {
-   "name": "Whisk3y",
-   "points": 11,
-   "games": 3
-  },
-  {
-   "name": "Jatoente",
-   "points": 10,
-   "games": 4
-  },
-  {
-   "name": "Moritz",
-   "points": 9,
-   "games": 4
-  },
-  {
-   "name": "SkinnyMF",
-   "points": 8,
-   "games": 4
-  },
-  {
-   "name": "Myonic",
-   "points": 8,
-   "games": 4
-  },
-  {
-   "name": "Smokey D Blaze",
-   "points": 8,
-   "games": 3
-  },
-  {
-   "name": "Chio91",
-   "points": 7,
-   "games": 4
-  },
-  {
-   "name": "JJ",
-   "points": 7,
-   "games": 4
-  },
-  {
-   "name": "Basinga",
-   "points": 6,
-   "games": 3
-  },
-  {
-   "name": "Roronoa Bilo",
-   "points": 6,
-   "games": 3
-  },
-  {
-   "name": "Sturmey",
-   "points": 6,
-   "games": 2
-  },
-  {
-   "name": "Ramsi",
-   "points": 5,
-   "games": 2
-  },
-  {
-   "name": "Chelly",
-   "points": 5,
-   "games": 2
-  },
-  {
-   "name": "Emilia",
-   "points": 3,
-   "games": 2
-  },
-  {
-   "name": "David",
-   "points": 3,
-   "games": 1
-  },
-  {
-   "name": "Bauschtel AK",
-   "points": 3,
-   "games": 1
-  },
-  {
-   "name": "Domroh",
-   "points": 3,
-   "games": 1
-  },
-  {
-   "name": "Faelboo",
-   "points": 3,
-   "games": 1
-  },
-  {
-   "name": "Ritter",
-   "points": 3,
-   "games": 1
-  },
-  {
-   "name": "Pasch",
-   "points": 2,
-   "games": 1
-  },
-  {
-   "name": "Alphatia",
-   "points": 2,
-   "games": 1
-  },
-  {
-   "name": "Cockodile",
-   "points": 1,
-   "games": 1
-  },
-  {
-   "name": "Pinoo66",
-   "points": 1,
-   "games": 1
-  }
- ]
+ "tables": {
+  "Herbst-Saison 2026": [
+   {
+    "name": "Faoky",
+    "points": 49,
+    "games": 11
+   },
+   {
+    "name": "Phanda",
+    "points": 42,
+    "games": 10
+   },
+   {
+    "name": "Trafa",
+    "points": 27,
+    "games": 9
+   },
+   {
+    "name": "Bonzenbence",
+    "points": 20,
+    "games": 9
+   },
+   {
+    "name": "Meruem",
+    "points": 15,
+    "games": 7
+   },
+   {
+    "name": "Noxfour",
+    "points": 14,
+    "games": 6
+   },
+   {
+    "name": "Chris4kl",
+    "points": 13,
+    "games": 5
+   },
+   {
+    "name": "Perser",
+    "points": 12,
+    "games": 4
+   },
+   {
+    "name": "1ceberk",
+    "points": 11,
+    "games": 4
+   },
+   {
+    "name": "Whisk3y",
+    "points": 11,
+    "games": 3
+   },
+   {
+    "name": "Jatoente",
+    "points": 10,
+    "games": 4
+   },
+   {
+    "name": "Moritz",
+    "points": 9,
+    "games": 4
+   },
+   {
+    "name": "SkinnyMF",
+    "points": 8,
+    "games": 4
+   },
+   {
+    "name": "Myonic",
+    "points": 8,
+    "games": 4
+   },
+   {
+    "name": "Smokey D Blaze",
+    "points": 8,
+    "games": 3
+   },
+   {
+    "name": "Chio91",
+    "points": 7,
+    "games": 4
+   },
+   {
+    "name": "JJ",
+    "points": 7,
+    "games": 4
+   },
+   {
+    "name": "Chelly",
+    "points": 7,
+    "games": 3
+   },
+   {
+    "name": "Basinga",
+    "points": 6,
+    "games": 3
+   },
+   {
+    "name": "Roronoa Bilo",
+    "points": 6,
+    "games": 3
+   },
+   {
+    "name": "Sturmey",
+    "points": 6,
+    "games": 2
+   },
+   {
+    "name": "Ramsi",
+    "points": 5,
+    "games": 2
+   },
+   {
+    "name": "Emilia",
+    "points": 3,
+    "games": 2
+   },
+   {
+    "name": "David",
+    "points": 3,
+    "games": 1
+   },
+   {
+    "name": "Bauschtel AK",
+    "points": 3,
+    "games": 1
+   },
+   {
+    "name": "Domroh",
+    "points": 3,
+    "games": 1
+   },
+   {
+    "name": "Faelboo",
+    "points": 3,
+    "games": 1
+   },
+   {
+    "name": "Ritter",
+    "points": 3,
+    "games": 1
+   },
+   {
+    "name": "Pasch",
+    "points": 2,
+    "games": 1
+   },
+   {
+    "name": "Alphatia",
+    "points": 2,
+    "games": 1
+   },
+   {
+    "name": "Cockodile",
+    "points": 1,
+    "games": 1
+   },
+   {
+    "name": "Pinoo66",
+    "points": 1,
+    "games": 1
+   }
+  ],
+  "Winter-Saison 2026/27": []
+ }
 }
 </script>
 
@@ -543,6 +557,8 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
         <h2>Rangliste</h2>
         <span class="stamp num" id="stamp"></span>
       </div>
+      <div class="season-pick" id="season-pick" role="group" aria-label="Saison wählen"></div>
+      <p class="champ" id="champ" hidden></p>
       <div class="search">
         <label for="q" class="eyebrow" style="color:var(--muted)">Suche</label>
         <input id="q" type="search" placeholder="Spielername eingeben" autocomplete="off">
@@ -555,6 +571,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
           <tbody id="rows"></tbody>
         </table>
         <div class="empty" id="no-hit" hidden>Kein Spieler gefunden.</div>
+        <div class="empty" id="no-data" hidden></div>
       </div>
       <div class="cut-note" id="cut-note"><i></i><span></span></div>
     </div>
@@ -686,7 +703,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
 <script>
 (function(){
   var data = JSON.parse(document.getElementById('liga-data').textContent);
-  var players = data.players;
+  var tables = data.tables || {};
 
   // Preise je Saison: die Tabelle zeigt die Preise der Saison, deren Stand gerade gilt
   var nowLoad = new Date();
@@ -694,6 +711,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
   var standIdx = 0;
   seasonList.forEach(function(se,i){ if(!se.start || new Date(se.start) <= nowLoad) standIdx = i; });
   var standSeason = seasonList[standIdx];
+  var players = tables[standSeason.name] || [];
   var scheme = (standSeason && standSeason.prizes) || [];
   var lastPrizePlace = scheme.reduce(function(m,p){ return Math.max(m,p.to); },0);
   function prizeEntry(rank){ for(var i=0;i<scheme.length;i++){ if(rank>=scheme[i].from && rank<=scheme[i].to) return scheme[i]; } return null; }
@@ -719,42 +737,62 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
       wrap.querySelector('.prize-next-head b').textContent=nxt.name;
       wrap.querySelector('.prize-next-list').appendChild(prizeList(nxt.prizes));
     }
-    var cn=document.getElementById('cut-note');
-    if(lastPrizePlace>0 && players.length>lastPrizePlace){ cn.querySelector('span').textContent='Bis Platz '+lastPrizePlace+' gibt es am Saisonende einen Preis.'; }
-    else cn.hidden=true;
   })();
   var bounty = {1:3,2:2,3:1};
   function shortPrize(p){ return p.replace(' Booster',' Bst.').replace(' € Credit',' €'); }
 
-  // Tabelle
+  // Tabelle je Saison
   var tbody = document.getElementById('rows');
-  players.forEach(function(p,i){
-    var r = i+1, tr = document.createElement('tr');
-    if(r<=3) tr.className = 't'+r;
-    if(r===lastPrizePlace && players.length>lastPrizePlace) tr.className += ' cut';
-    tr.dataset.name = p.name.trim().toLowerCase();
-    var prize = prizeFor(r);
-    tr.innerHTML =
-      '<td class="pos num">'+r+'</td>'+
-      '<td class="name"></td>'+
-      '<td class="pts r num">'+p.points+'</td>'+
-      '<td class="r num col-tn">'+p.games+'</td>'+
-      '<td class="prize'+(prize?'':' none')+'">'+(prize?'<span class="tn-long">'+prize+'</span><span class="tn-short">'+shortPrize(prize)+'</span>':'–')+'</td>';
-    var nameCell = tr.querySelector('.name');
-    nameCell.textContent = p.name.trim();
-    if(bounty[r]){
-      var b = document.createElement('span'); b.className='bnt'; b.textContent='฿ +'+bounty[r];
-      b.title = 'Kopfgeld ab der Winter-Saison: +'+bounty[r]+' Punkte für einen Sieg gegen diesen Spieler';
-      nameCell.appendChild(b);
-    }
-    tbody.appendChild(tr);
+  function schemeOf(se){ return (se && se.prizes) || []; }
+  function renderTable(se){
+    var list = tables[se.name] || [], sc = schemeOf(se), last = sc.reduce(function(m,p){ return Math.max(m,p.to); },0);
+    var isActive = se === standSeason && !se.end_passed;
+    tbody.innerHTML='';
+    list.forEach(function(p,i){
+      var r = i+1, tr = document.createElement('tr');
+      if(r<=3) tr.className = 't'+r;
+      if(r===last && list.length>last) tr.className += ' cut';
+      tr.dataset.name = p.name.trim().toLowerCase();
+      var e=null; for(var k=0;k<sc.length;k++){ if(r>=sc[k].from && r<=sc[k].to) e=sc[k]; }
+      var prize = e ? e.label : '';
+      tr.innerHTML =
+        '<td class="pos num">'+r+'</td>'+
+        '<td class="name"></td>'+
+        '<td class="pts r num">'+p.points+'</td>'+
+        '<td class="r num col-tn">'+p.games+'</td>'+
+        '<td class="prize'+(prize?'':' none')+'">'+(prize?'<span class="tn-long">'+prize+'</span><span class="tn-short">'+shortPrize(prize)+'</span>':'–')+'</td>';
+      var nameCell = tr.querySelector('.name');
+      nameCell.textContent = p.name.trim();
+      if(se.bounty && bounty[r]){
+        var b = document.createElement('span'); b.className='bnt'; b.textContent='฿ +'+bounty[r];
+        b.title = 'Kopfgeld: +'+bounty[r]+' Punkte für einen Sieg gegen diesen Spieler';
+        nameCell.appendChild(b);
+      }
+      tbody.appendChild(tr);
+    });
+    var cn=document.getElementById('cut-note');
+    if(last>0 && list.length>last){ cn.hidden=false; cn.querySelector('span').textContent='Bis Platz '+last+' gibt es am Saisonende einen Preis.'; } else cn.hidden=true;
+    var nd=document.getElementById('no-data');
+    nd.hidden = list.length>0;
+    nd.textContent = 'Noch keine Ergebnisse in der '+se.name+'. Erstes Local: '+(se.firstDay||'zum Saisonstart')+'.';
+    var ch=document.getElementById('champ');
+    if(se.champion){ ch.hidden=false; ch.innerHTML='Saisonsieger: <b></b>'; ch.querySelector('b').textContent=se.champion; } else ch.hidden=true;
+    document.getElementById('stamp').textContent = se.final ? 'Endstand' : 'Stand: '+data.updated;
+    [].forEach.call(document.querySelectorAll('.season-btn'),function(btn){ btn.setAttribute('aria-pressed', btn.dataset.season===se.name ? 'true':'false'); });
+    var q=document.getElementById('q'); if(q && q.value){ q.dispatchEvent(new Event('input')); }
+  }
+  var pick=document.getElementById('season-pick');
+  seasonList.slice().reverse().forEach(function(se){
+    var started = !se.start || new Date(se.start) <= nowLoad;
+    if(!started && !(tables[se.name]||[]).length) return;
+    var btn=document.createElement('button'); btn.type='button'; btn.className='season-btn'; btn.dataset.season=se.name; btn.textContent=se.name;
+    btn.addEventListener('click',function(){ renderTable(se); });
+    pick.appendChild(btn);
   });
-  // Kopfgeld-Steckbrief mit aktuellen Top 3
-  Array.prototype.forEach.call(document.querySelectorAll('#bounty-list li'), function(li,i){
-    if(players[i]) li.querySelector('.bc-name').textContent = players[i].name.trim();
-  });
-  document.getElementById('chip-players').innerHTML = '<b>'+players.length+'</b> Spieler in der Liga';
-  document.getElementById('stamp').textContent = 'Stand: '+data.updated;
+  if(pick.children.length<2) pick.hidden=true;
+  renderTable(standSeason);
+  document.getElementById('chip-players').innerHTML = '<b>'+players.length+'</b> Spieler in der '+standSeason.name;
+  if(!players.length) document.getElementById('chip-players').hidden = true;
 
 
   // Tabs

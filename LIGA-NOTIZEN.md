@@ -1,6 +1,10 @@
 # CardKomet One Piece Liga – Notizen für die Pflege
 
-## Saisonwechsel (gilt ab Winter-Saison, 23.11.2026)
+## Saisonwechsel
+- Erledigt am 21.11.2026: Herbst-Saison archiviert (Sheet-Tab `Herbst-Saison 2026`, Webseite: Saison-Auswahl in der Rangliste). Endstand: 1. Faoky 49, 2. Phanda 42, 3. Trafa 27.
+- Aktiver Sheet-Tab `Liga-Rangliste` = Winter-Saison 2026/27 (ab 23.11.2026, alle bei 0).
+
+### Vorgehen beim nächsten Wechsel
 - **Alte Saison NIEMALS löschen.** Die Rangliste der Herbst-Saison 2026 (Saison 1) wird archiviert:
   - Google Sheet: Tab `Liga-Rangliste` als neuen Tab `Herbst-Saison 2026` kopieren, danach Punkte/Teilnahmen im aktiven Tab auf 0 setzen.
   - Webseite: Endstand der alten Saison als „Vergangene Saisons“ anzeigen (Saison auswählbar).
