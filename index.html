@@ -158,9 +158,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .champ{margin:0 0 12px;font-weight:700;color:var(--gold)}
 .champ b{font-family:var(--f-display);font-weight:400;color:var(--fg)}
 
+@media (max-width:640px){.search-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.search{flex-wrap:nowrap;gap:8px}.season-sel{flex:0 1 auto;font-size:15px;padding:10px 32px 10px 12px}}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.season-sel{appearance:none;-webkit-appearance:none;font:inherit;font-weight:700;color:#231a12;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23231a12' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 12px center;border:0;border-radius:10px;padding:10px 36px 10px 14px;cursor:pointer;max-width:100%}
+.season-sel option{color:#231a12;background:#fff}
+
 /* Tabelle */
-.search{display:flex;gap:10px;align-items:center;margin-bottom:12px}
-.search input{flex:1;min-width:0;max-width:340px;background:var(--deck);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:10px 12px;font:inherit}
+.search{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.search input{flex:1 1 120px;min-width:0;max-width:340px;background:var(--deck);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:10px 12px;font:inherit}
 .search input::placeholder{color:var(--muted)}
 .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--deck)}
 table{width:100%;border-collapse:collapse;min-width:0}
@@ -557,11 +562,12 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
         <h2>Rangliste</h2>
         <span class="stamp num" id="stamp"></span>
       </div>
-      <div class="season-pick" id="season-pick" role="group" aria-label="Saison wählen"></div>
       <p class="champ" id="champ" hidden></p>
       <div class="search">
-        <label for="q" class="eyebrow" style="color:var(--muted)">Suche</label>
-        <input id="q" type="search" placeholder="Spielername eingeben" autocomplete="off">
+        <label for="q" class="eyebrow search-label" style="color:var(--muted)">Suche</label>
+        <input id="q" type="search" placeholder="Name suchen" autocomplete="off">
+        <label for="season-sel" class="sr-only">Saison wählen</label>
+        <select id="season-sel" class="season-sel"></select>
       </div>
       <div class="tbl-wrap">
         <table>
@@ -778,19 +784,17 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
     var ch=document.getElementById('champ');
     if(se.champion){ ch.hidden=false; ch.innerHTML='Saisonsieger: <b></b>'; ch.querySelector('b').textContent=se.champion; } else ch.hidden=true;
     document.getElementById('stamp').textContent = se.final ? 'Endstand' : 'Stand: '+data.updated;
-    [].forEach.call(document.querySelectorAll('.season-btn'),function(btn){ btn.setAttribute('aria-pressed', btn.dataset.season===se.name ? 'true':'false'); });
+    var sl=document.getElementById('season-sel'); if(sl) sl.value=se.name;
     var q=document.getElementById('q'); if(q && q.value){ q.dispatchEvent(new Event('input')); }
   }
-  var pick=document.getElementById('season-pick');
+  var sel=document.getElementById('season-sel');
+  var newest=seasonList[seasonList.length-1];
   seasonList.slice().reverse().forEach(function(se){
-    var started = !se.start || new Date(se.start) <= nowLoad;
-    if(!started && !(tables[se.name]||[]).length) return;
-    var btn=document.createElement('button'); btn.type='button'; btn.className='season-btn'; btn.dataset.season=se.name; btn.textContent=se.name;
-    btn.addEventListener('click',function(){ renderTable(se); });
-    pick.appendChild(btn);
+    var o=document.createElement('option'); o.value=se.name; o.textContent=se.name; sel.appendChild(o);
   });
-  if(pick.children.length<2) pick.hidden=true;
-  renderTable(standSeason);
+  sel.addEventListener('change',function(){ for(var i=0;i<seasonList.length;i++){ if(seasonList[i].name===sel.value) renderTable(seasonList[i]); } });
+  if(seasonList.length<2){ sel.hidden=true; }
+  renderTable(newest);
   document.getElementById('chip-players').innerHTML = '<b>'+players.length+'</b> Spieler in der '+standSeason.name;
   if(!players.length) document.getElementById('chip-players').hidden = true;
 
