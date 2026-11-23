@@ -880,7 +880,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
         g.title='Display-Garantie: Top 12 nach Teilnahmen';
         nameCell.appendChild(g);
       }
-      if(se.bounty && bounty[r]){
+      if(se.bounty && bounty[r] && list.length>3 && p.points>list[3].points){
         var b = document.createElement('span'); b.className='bnt'; b.textContent='฿ +'+bounty[r];
         b.title = 'Kopfgeld: +'+bounty[r]+' Punkte für einen Sieg gegen diesen Spieler';
         nameCell.appendChild(b);
@@ -906,6 +906,13 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
   sel.addEventListener('change',function(){ for(var i=0;i<seasonList.length;i++){ if(seasonList[i].name===sel.value) renderTable(seasonList[i]); } });
   if(seasonList.length<2){ sel.hidden=true; }
   renderTable(newest);
+  // Kopfgeld-Steckbrief: aktuelle Top 3, nur bei echtem Vorsprung
+  (function(){
+    var cur = tables[newest.name] || [];
+    [].forEach.call(document.querySelectorAll('#bounty-list li'), function(li,i){
+      if(newest.bounty && cur[i] && cur.length>3 && cur[i].points>cur[3].points) li.querySelector('.bc-name').textContent = cur[i].name.trim();
+    });
+  })();
   document.getElementById('chip-players').innerHTML = '<b>'+players.length+'</b> Spieler in der '+standSeason.name;
   if(!players.length) document.getElementById('chip-players').hidden = true;
 
