@@ -26,3 +26,7 @@
 
 ## Locals
 - Montag & Donnerstag, 18:00 Uhr · Anmeldung über die Bandai TCG+ App
+
+## Display-Garantie (ab 23.11.2026)
+- Zu jedem neuen One Piece Set: die 12 Spieler mit den meisten Teilnahmen (Stichtag = Release des Sets) können garantiert ein Display zum UVP kaufen.
+- Gleich viele Teilnahmen: Rang in der Tabelle entscheidet.
