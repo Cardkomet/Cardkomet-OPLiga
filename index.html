@@ -670,7 +670,6 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
         <div class="empty" id="no-data" hidden></div>
       </div>
       <div class="cut-note" id="cut-note"><i></i><span></span></div>
-      <p class="dg-legend" id="dg-legend" hidden><span class="dg" style="margin-left:0">UVP</span> Top 12 nach Teilnahmen: garantiert ein Display zum UVP beim nächsten One Piece Set.</p>
     </div>
   </section>
 
@@ -719,7 +718,6 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
             <li><span>Stichtag</span><b>Release des Sets</b></li>
             <li><span>Gleichstand</span><b>Rang entscheidet</b></li>
           </ul>
-          <p class="note">In der Rangliste sind diese Spieler mit <span class="dg">UVP</span> markiert.</p>
         </div>
         </div>
       </div>
@@ -860,7 +858,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
       list.map(function(p,i){return {n:p.name,g:p.games,r:i};}).filter(function(x){return x.g>0;})
         .sort(function(a,b){return b.g-a.g || a.r-b.r;}).slice(0,12).forEach(function(x){ dgSet[x.n]=true; });
     }
-    var dl=document.getElementById('dg-legend'); if(dl) dl.hidden = !Object.keys(dgSet).length;
+
     list.forEach(function(p,i){
       var r = i+1, tr = document.createElement('tr');
       if(r<=3) tr.className = 't'+r;
@@ -876,11 +874,6 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
         '<td class="prize'+(prize?'':' none')+'">'+(prize?'<span class="tn-long">'+prize+'</span><span class="tn-short">'+shortPrize(prize)+'</span>':'–')+'</td>';
       var nameCell = tr.querySelector('.name');
       nameCell.textContent = p.name.trim();
-      if(dgSet[p.name]){
-        var g=document.createElement('span'); g.className='dg'; g.textContent='UVP';
-        g.title='Display-Garantie: Top 12 nach Teilnahmen';
-        nameCell.appendChild(g);
-      }
       if(se.bounty && bounty[r] && uniqueAt(list,i)){
         var b = document.createElement('span'); b.className='bnt'; b.textContent='฿ +'+bounty[r];
         b.title = 'Kopfgeld: +'+bounty[r]+' Punkte für einen Sieg gegen diesen Spieler';
