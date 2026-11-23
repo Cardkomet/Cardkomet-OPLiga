@@ -709,7 +709,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
             <li><span class="bc-rank">Platz 3</span><span class="bc-name">–</span><span class="bc-berry">฿ +1</span></li>
           </ol>
           <p class="bc-text">Wer im Local gegen einen dieser Piraten gewinnt, kassiert das Kopfgeld als Bonuspunkte zusätzlich zum Sieg.</p>
-          <p class="bc-small">Es zählt der Tabellenstand zu Beginn des jeweiligen Locals.</p>
+          <p class="bc-small">Es zählt der Tabellenstand zu Beginn des jeweiligen Locals. Teilen sich mehrere Spieler einen Platz, gibt es für diesen Platz kein Kopfgeld.</p>
           <span class="bc-stamp">Marine HQ<br>CardKomet</span>
         </div>
         <div class="card dg-card">
@@ -849,6 +849,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
 
   // Tabelle je Saison
   var tbody = document.getElementById('rows');
+  function uniqueAt(list,i){ var p=list[i]; if(!p) return false; if(i>0 && list[i-1].points===p.points) return false; if(list[i+1] && list[i+1].points===p.points) return false; return true; }
   function schemeOf(se){ return (se && se.prizes) || []; }
   function renderTable(se){
     var list = tables[se.name] || [], sc = schemeOf(se), last = sc.reduce(function(m,p){ return Math.max(m,p.to); },0);
@@ -880,7 +881,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
         g.title='Display-Garantie: Top 12 nach Teilnahmen';
         nameCell.appendChild(g);
       }
-      if(se.bounty && bounty[r] && list.length>3 && p.points>list[3].points){
+      if(se.bounty && bounty[r] && uniqueAt(list,i)){
         var b = document.createElement('span'); b.className='bnt'; b.textContent='฿ +'+bounty[r];
         b.title = 'Kopfgeld: +'+bounty[r]+' Punkte für einen Sieg gegen diesen Spieler';
         nameCell.appendChild(b);
@@ -910,7 +911,7 @@ footer{padding-block:40px 34px;color:var(--muted);font-size:14px;text-align:cent
   (function(){
     var cur = tables[newest.name] || [];
     [].forEach.call(document.querySelectorAll('#bounty-list li'), function(li,i){
-      if(newest.bounty && cur[i] && cur.length>3 && cur[i].points>cur[3].points) li.querySelector('.bc-name').textContent = cur[i].name.trim();
+      if(newest.bounty && uniqueAt(cur,i)) li.querySelector('.bc-name').textContent = cur[i].name.trim();
     });
   })();
   document.getElementById('chip-players').innerHTML = '<b>'+players.length+'</b> Spieler in der '+standSeason.name;
