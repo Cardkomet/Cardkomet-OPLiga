@@ -21,7 +21,7 @@
 
 ## Punkte
 - Teilnahme +1 · Sieg +1 (Freilos zählt als Sieg) · Turniersieg +2
-- Kopfgeld: Sieg gegen Platz 1/2/3 = +3/+2/+1 (Stand zu Beginn des Locals; bei Punktgleichstand auf einem Platz gibt es für diesen Platz kein Kopfgeld) – gilt ab der Winter-Saison (23.11.2026)
+- Kopfgeld: Sieg gegen Platz 1/2/3 = +3/+2/+1 (Stand zu Beginn des Locals; Kopfgeld gilt immer für die ersten 3 Zeilen der Tabelle, auch bei Punktgleichstand – Reihenfolge nach Punkten, dann Teilnahmen; Wunsch Koray 26.11.2026) – gilt ab der Winter-Saison (23.11.2026)
 - Gleichstand: mehr Teilnahmen steht vorne
 
 ## Locals
